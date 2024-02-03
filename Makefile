@@ -3,7 +3,7 @@ URIBASE = http://purl.obolibrary.org/obo
 ROBOT=robot
 # the below onts were collected from ols-config.yaml
 # (note that .owl is appended to each of these later on, so there's no need to add it here)
-ONTS = upheno2 upheno-patterns vbo-edit hp-edit chr mondo-edit mondo-rare mondo-patterns hp-branch-lymphoma omim
+ONTS = upheno2 upheno-patterns vbo-edit hp-edit chr mondo-edit mondo-rare mondo-patterns hp-branch-lymphoma omim mondo-clingen
 
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
@@ -68,6 +68,9 @@ ontologies/mondo-patterns.owl:
 
 ontologies/mondo-rare.owl:
 	$(ROBOT) convert -I http://purl.obolibrary.org/obo/mondo/subsets/mondo-rare.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+
+ontologies/mondo-clingen.owl:
+	$(ROBOT) convert -I https://raw.githubusercontent.com/monarch-initiative/mondo/gard-import/src/ontology/subsets/mondo-clingen.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 ontologies/uberon-human-view.owl:
 	$(ROBOT) convert -I http://purl.obolibrary.org/obo/uberon/subsets/human-view.owl -o $@.tmp.owl && mv $@.tmp.owl $@
