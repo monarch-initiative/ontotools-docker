@@ -3,7 +3,7 @@ URIBASE = http://purl.obolibrary.org/obo
 ROBOT=robot
 # the below onts were collected from ols-config.yaml
 # (note that .owl is appended to each of these later on, so there's no need to add it here)
-ONTS = upheno2 upheno-patterns vbo-edit hp-edit chr mondo-edit mondo-rare mondo-patterns omim mondo-clingen
+ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen
 
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
@@ -55,10 +55,8 @@ ontologies/omim.owl:
 
 UPHENO_URL=https://github.com/obophenotype/upheno-dev/releases/download/v2023-10-27/upheno_all.owl
 
-ontologies/upheno2.owl: 
-	$(ROBOT) -vv merge -I $(UPHENO_URL) \
-	remove --term-file src/remove_terms.txt \
-	annotate --link-annotation http://purl.obolibrary.org/obo/IAO_0000700 http://purl.obolibrary.org/obo/UPHENO_0001001 -o $@.tmp.owl && mv $@.tmp.owl $@
+ontologies/upheno-reordered.owl: 
+	$(ROBOT) convert -I https://github.com/obophenotype/upheno-dev/releases/latest/download/upheno-curated.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 ontologies/upheno-patterns.owl:
 	$(ROBOT) convert -I https://raw.githubusercontent.com/obophenotype/upheno/master/src/patterns/pattern.owl -o $@.tmp.owl && mv $@.tmp.owl $@
@@ -71,6 +69,9 @@ ontologies/mondo-rare.owl:
 
 ontologies/mondo-clingen.owl:
 	$(ROBOT) convert -I https://raw.githubusercontent.com/monarch-initiative/mondo/gard-import/src/ontology/subsets/mondo-clingen.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+
+ontologies/mondo-matrix.owl:
+	$(ROBOT) convert -I https://github.com/everycure-org/matrix-disease-list/releases/latest/download/mondo-with-filter-designations.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 ontologies/uberon-human-view.owl:
 	$(ROBOT) convert -I http://purl.obolibrary.org/obo/uberon/subsets/human-view.owl -o $@.tmp.owl && mv $@.tmp.owl $@
