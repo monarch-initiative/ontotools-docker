@@ -38,6 +38,12 @@ services:
         - ols.customisation.org=Monarch Initiative
         - ols.customisation.short-title=MOLS
         - ols.customisation.supportMail=info@monarchinitiative.org
+      healthcheck:
+          test: "(curl -f -s http://localhost:8080/search?q=GO:0098743&healthcheck=true) || exit 1"
+          interval: 30s
+          timeout: 15s
+          retries: 3
+          start_period: 6m  
       volumes:
         - ./ols-neo4j-data:/mnt/neo4j
         - ./config/ols-config/logo-monarch.png:/mnt/web-custom/logo.png
