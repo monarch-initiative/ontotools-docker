@@ -12,7 +12,7 @@ env:
   TARGET_ZONE: "us-central1-a"
   TARGET_USER: "ols_deployer"
   MACHINE_TYPE_BUILDING: "e2-highmem-4"
-  MACHINE_TYPE_SERVING: "e2-medium"
+  MACHINE_TYPE_SERVING: "e2-standard-2"
 
 jobs:
   update-gcp-services:
