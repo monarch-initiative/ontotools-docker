@@ -29,6 +29,7 @@ services:
         - ols-solr
         - ols-mongo
       environment:
+        - JAVA_OPTS=-Xms2g -Xmx4g -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError
         - spring.data.solr.host=http://ols-solr:8983/solr
         - spring.data.mongodb.host=ols-mongo
         - OLS_HOME=/mnt/
