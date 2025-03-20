@@ -7,5 +7,5 @@
 .DS_Store
 scripts/.ipynb_checkpoints
 /ontologies/*
-/github/*
+/github
 /deploy_logs/*
