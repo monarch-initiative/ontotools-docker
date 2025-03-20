@@ -1,2 +1,3 @@
-export OLS4_CONFIG=$(pwd)/config/ols-config/ols-config.json
-docker compose up
+export OLS4_CONFIG=./config/ols-config/ols-config.json
+docker compose down -f -s -v
+docker compose up --force-recreate
