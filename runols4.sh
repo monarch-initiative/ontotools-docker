@@ -1,3 +1,5 @@
 export OLS4_CONFIG=./config/ols-config/ols-config.json
-docker compose down -f -s -v
+mkdir -p tmp
+#docker compose rm -f -v
+#docker compose up ols4-dataload --force-recreate
 docker compose up --force-recreate
