@@ -3,9 +3,7 @@ services:
     ols4-dataload:
       environment:
         - JAVA_OPTS=${JAVA_OPTS}
-      build:
-        context: .
-        dockerfile: ./dataload/Dockerfile
+      image: ghcr.io/ebispot/ols4-dataload:dev
       volumes:
         - ols4-solr-data:/opt/solr/server/solr:rw
         - ols4-neo4j-data:/opt/neo4j/data:rw
@@ -39,9 +37,7 @@ services:
         ols4-dataload:
           condition: service_completed_successfully
     ols4-backend:
-      build:
-        context: .
-        dockerfile: ./backend/Dockerfile
+      image: ghcr.io/ebispot/ols4-backend:dev
       ports:
         - 8080:8080
       environment:
@@ -54,8 +50,7 @@ services:
         - ols4-solr
         - ols4-neo4j 
     ols4-frontend:
-      build:
-        context: ./frontend
+      image: ghcr.io/ebispot/ols4-frontend:dev
       env_file: ./frontend/.env
       ports:
         - 8081:8080
