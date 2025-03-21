@@ -58,6 +58,10 @@ services:
         - ols4-backend
       links:
         - ols4-backend
+      volumes:
+        - ./frontend/Home.tsx:/opt/ols4-frontend/src/pages/home/Home.tsx
+        - ./frontend/Header.tsx:/opt/ols4-frontend/src/components/Header.tsx
+        - ./frontend/Footer.tsx:/opt/ols4-frontend/src/components/Footer.tsx
     #run-api-tests:
     #  profiles: ["run-api-tests"]
     #  build: ./apitester4
