@@ -21,9 +21,9 @@ services:
       volumes:
         - ols4-solr-data:/mnt/ols4-solr-data
       command: ["-f"]
-      depends_on:
-        ols4-dataload:
-          condition: service_completed_successfully
+      #depends_on:
+      #  ols4-dataload:
+      #    condition: service_completed_successfully
     ols4-neo4j:
       image: neo4j:4.4.9-community
       ports:
@@ -33,9 +33,9 @@ services:
         - ols4-neo4j-data:/var/lib/neo4j/data
       environment:
         - NEO4J_AUTH=none
-      depends_on:
-        ols4-dataload:
-          condition: service_completed_successfully
+      #depends_on:
+      #  ols4-dataload:
+      #    condition: service_completed_successfully
     ols4-backend:
       image: ghcr.io/ebispot/ols4-backend:dev
       ports:
