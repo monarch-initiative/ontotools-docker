@@ -75,3 +75,9 @@ ontologies/mondo-matrix.owl:
 
 ontologies/uberon-human-view.owl:
 	$(ROBOT) convert -I http://purl.obolibrary.org/obo/uberon/subsets/human-view.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+
+
+update-ui:
+	wget https://raw.githubusercontent.com/EBISPOT/ols4/refs/heads/dev/frontend/src/components/Footer.tsx -O frontend/Footer.tsx
+	
+
