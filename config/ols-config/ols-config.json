@@ -1,0 +1,196 @@
+{
+  "@context": null,
+  "ontologies": [
+    {
+      "id": "upheno_reordered",
+      "preferredPrefix": "UPHENO_REORDERED",
+      "title": "Unified Phenotype Ontology (uPheno2) with reordered upper level",
+      "description": "In this version of the uPheno2 ontology, the upper level classes have been curated specifically to make it more accessible to biocuration users. \n",
+      "uri": "http://purl.obolibrary.org/obo/upheno/upheno-curated.owl",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/UPHENO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "hierarchical_property": [
+        "http://purl.obolibrary.org/obo/BFO_0000050"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/upheno-reordered.owl"
+    },
+    {
+      "id": "upheno_patterns",
+      "preferredPrefix": "UPHENO_PATTERN",
+      "title": "Unified Phenotype Ontology Pattern Ontology",
+      "description": "Ontology that contains all the currently defined uPheno patterns\n",
+      "uri": "http://purl.obolibrary.org/obo/upheno/patterns/pattern.owl",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/UPHENO_PATTERN_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "ontology_purl": "file:/mnt/ontologies/upheno-patterns.owl"
+    },
+    {
+      "id": "mondo_patterns",
+      "preferredPrefix": "MONDO_PATTERN",
+      "title": "Mondo Disease Ontology Pattern Ontology",
+      "description": "Ontology that contains all the currently defined Mondo patterns.  DO NOT USE IN PRODUCTION.\n",
+      "uri": "https://raw.githubusercontent.com/monarch-initiative/mondo/master/src/patterns/pattern.owl",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/mondo/patterns/"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "ontology_purl": "file:/mnt/ontologies/mondo-patterns.owl"
+    },
+    {
+      "id": "vbo",
+      "preferredPrefix": "VBO_DEV",
+      "title": "Vertebrate Breed Ontology (Development Snapshot)",
+      "uri": "http://purl.obolibrary.org/obo/vbo.owl",
+      "description": "A work in progress deployment of VBO. Contact Sabrina Toro. DO NOT USE IN PRODUCTION.\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/VBO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/vbo-edit.owl",
+      "reasoner": "EL"
+    },
+    {
+      "id": "mondo_rare",
+      "preferredPrefix": "MONDO_RARE",
+      "title": "Mondo Disease Ontology (Rare Disease Subset)",
+      "uri": "http://purl.obolibrary.org/obo/mondo/subsets/mondo-rare.owl",
+      "description": "The Mondo Rare Disease Subset. DO NOT USE IN PRODUCTION.\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/MONDO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/mondo-rare.owl"
+    },
+    {
+      "id": "mondo_matrix",
+      "preferredPrefix": "MONDO_MATRIX",
+      "title": "Mondo Disease Ontology (MATRIX version)",
+      "uri": "http://purl.obolibrary.org/obo/mondo/subsets/mondo-matrix.owl",
+      "description": "This is a modified version of Mondo specifically for the MATRIX project. DO NOT USE IN PRODUCTION.\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/MONDO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/mondo-matrix.owl"
+    },
+    {
+      "id": "mondo_clingen",
+      "preferredPrefix": "MONDO_CLINGEN",
+      "title": "Mondo Disease Ontology (ClinGen Subset)",
+      "uri": "http://purl.obolibrary.org/obo/mondo/subsets/mondo-clingen.owl",
+      "description": "Development Snapshot of the Mondo ClinGen Subset. DO NOT USE IN PRODUCTION. The Mondo ClinGen subset contains all the diseases that are in the ClinGen database and displays the labels preferred by ClinGen.\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/MONDO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/mondo-clingen.owl"
+    },
+    {
+      "id": "mondo",
+      "preferredPrefix": "MONDO_DEV",
+      "title": "Mondo Disease Ontology (Development Snapshot)",
+      "uri": "http://purl.obolibrary.org/obo/mondo.owl",
+      "description": "Unofficial development snapshot of the Mondo Disease Ontology. Contact Sabrina Toro. DO NOT USE IN PRODUCTION.\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/MONDO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/mondo-edit.owl"
+    },
+    {
+      "id": "omim",
+      "preferredPrefix": "OMIM",
+      "title": "Monarch version of OMIM (Development Snapshot for ETL)",
+      "uri": "https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl",
+      "description": "Unofficial development snapshot of the Monarch version OMIM, see https://github.com/monarch-initiative/omim. The file is not meant to be used by anything other than Mondo ETL, and serves merely as a  flat, browsable representation of the OMIM diseases as a reference for Mondo curators.\n",
+      "base_uri": [
+        "https://omim.org/phenotypicSeries/PS",
+        "https://omim.org/entry/"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/omim.owl"
+    },
+    {
+      "id": "chr",
+      "preferredPrefix": "CHR",
+      "title": "Monochrom Ontology (Development Snapshot)",
+      "uri": "https://raw.githubusercontent.com/monarch-initiative/monochrom/master/chr.owl",
+      "description": "Unofficial development snapshot of the Human Phenotype Ontologies. https://github.com/monarch-initiative/monochrom/issues\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/HP_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/chr.owl"
+    }
+  ]
+}

@@ -1,131 +1,78 @@
-version: '3.8'
+version: '3'
 services:
-    ols-solr:
-        image: ebispot/ols-solr:latest
-        environment:
-          - SOLR_HOME=/mnt/solr-config
-        ports:
-          - 8983:8983
-        volumes:
-          - ols-solr-data:/var/solr
-          - ./config/ols-solr5-config:/mnt/solr-config
-        command: ["-Dsolr.solr.home=/mnt/solr-config", "-Dsolr.data.dir=/var/solr", "-Dsolr.log=/mnt/solr-data/logs", "-f"]
-        restart: unless-stopped
-    ols-mongo:
-      image: mongo:3.2.9
-      ports:
-          - 27017:27017
-      volumes:
-          - ols-mongo-data:/data/db
-      command:
-          - mongod
-      restart: unless-stopped
-    ols-web:
-      image: ebispot/ols-web:stable
-      depends_on:
-        - ols-solr
-        - ols-mongo
-      links:
-        - ols-solr
-        - ols-mongo
+    ols4-dataload:
       environment:
-        - spring.data.solr.host=http://ols-solr:8983/solr
-        - spring.data.mongodb.host=ols-mongo
-        - OLS_HOME=/mnt/
-        - ols.customisation.debrand=true
-        - ols.customisation.logo=https://raw.githubusercontent.com/jmcmurry/closed-illustrations/master/logos/monarch-logos/monarch-logo-white.png
-        - ols.customisation.title=Ontology Lookup Service
-        - ols.customisation.org=Monarch Initiative
-        - ols.customisation.short-title=MOLS
-        - ols.customisation.supportMail=info@monarchinitiative.org
-      healthcheck:
-          test: "(curl -f -s http://localhost:8080/search?q=GO:0098743&healthcheck=true) || exit 1"
-          interval: 30s
-          timeout: 15s
-          retries: 3
-          start_period: 6m  
+        - JAVA_OPTS=${JAVA_OPTS}
+      image: ghcr.io/ebispot/ols4-dataload:dev
       volumes:
-        - ./ols-neo4j-data:/mnt/neo4j
-        - ./config/ols-config/logo-monarch.png:/mnt/web-custom/logo.png
-        - ./ontologies:/mnt/ontologies
-      restart: unless-stopped
-      ports:
-      - 8080:8080
-    oxo-solr:
-        image: ebispot/ols-solr:stable
-        environment:
-          - SOLR_HOME=/mnt/solr-config
-        ports:
-          - 8985:8983
-        volumes:
-          - oxo-solr-data:/var/solr
-          - ./config/oxo-solr5-config:/mnt/solr-config
-        command: ["-Dsolr.solr.home=/mnt/solr-config", "-Dsolr.data.dir=/var/solr", "-Dsolr.log=/mnt/solr-data/logs", "-f"]
-    oxo-neo4j:
-        image: neo4j:3.1.1
-        environment:
-            # - NEO4J_HEAP_MEMORY=10g # configure the heap memory
-            # - NEO4J_dbms_memory_heap_maxSize=8g
-          - NEO4J_AUTH=neo4j/dba
-        cap_add:
-          - SYS_RESOURCE
-        ports:
-          - 7474:7474
-          - 7687:7687
-        volumes:
-          - ./oxo-neo4j-import:/var/lib/neo4j/import
-          - oxo-neo4j-data:/data
-    oxo-web:
-        image: ebispot/oxo-web:stable
-        depends_on:
-          - oxo-neo4j
-          - oxo-solr
-          - ols-web
-        links:
-          - oxo-neo4j
-          - oxo-solr
-          - ols-web
-        environment:
-          - spring.datasource.url=jdbc:hsqldb:file:/mnt/hsqldb
-          - oxo.neo.driver=org.neo4j.ogm.drivers.http.driver.HttpDriver
-          - oxo.neo.uri=http://neo4j:dba@oxo-neo4j:7474
-          - spring.data.solr.host=http://oxo-solr:8983/solr
-          - oxo.customisation.debrand=true
-          - oxo.customisation.logo=/custom/logo.png
-          - oxo.customisation.title=OxO Instance
-          - oxo.customisation.org=CUSTOM
-          - oxo.customisation.short-title=CUSTOM-OxO
-          - OXO_CUSTOM=/mnt/custom
-        volumes:
-          - oxo-hsqldb:/mnt/hsqldb
-          - ./config/oxo-config/logo.png:/mnt/custom/logo.png
-        ports:
-        - 8008:8080
-    zooma-web:
-      image: ebispot/zooma:stable
-      depends_on:
-        - ols-web
-      links:
-        - ols-web
+        - ols4-solr-data:/opt/solr/server/solr:rw
+        - ols4-neo4j-data:/opt/neo4j/data:rw
+        - ./${OLS4_CONFIG:?OLS4 dataload requires a config file}:/mnt/config.json:ro
+        - ./ontologies:/mnt/ontologies:ro
+          #- ./testcases:/opt/ols/dataload/testcases:ro
+        - ./tmp:/tmp/out:rw
+      command: ./dataload.dockersh ${OLS4_DATALOAD_ARGS:-}
+    ols4-solr:
+      image: solr:9.0.0
       environment:
-        - ols.term.location=http://ols-web:8080/ols/api/terms?iri=
-        - ZOOMA_HOME=/root/.zooma
-        - ZOOMA_DATA_DIR=/root/.zooma/data
-      volumes:
-        - ./config/zooma-config/config:/root/.zooma/config
-        - ./config/zooma-config/loaders:/root/.zooma/loaders
-        - ./zooma-data:/root/.zooma/data
+        - SOLR_HOME=/mnt/ols4-solr-data
       ports:
-      - 8009:8080
-
+        - 8983:8983
+      volumes:
+        - ols4-solr-data:/mnt/ols4-solr-data
+      command: ["-f"]
+      #depends_on:
+      #  ols4-dataload:
+      #    condition: service_completed_successfully
+    ols4-neo4j:
+      image: neo4j:4.4.9-community
+      ports:
+        - 7474:7474
+        - 7687:7687
+      volumes:
+        - ols4-neo4j-data:/var/lib/neo4j/data
+      environment:
+        - NEO4J_AUTH=none
+      #depends_on:
+      #  ols4-dataload:
+      #    condition: service_completed_successfully
+    ols4-backend:
+      image: ghcr.io/ebispot/ols4-backend:dev
+      ports:
+        - 8080:8080
+      environment:
+        - OLS_SOLR_HOST=http://ols4-solr:8983
+        - OLS_NEO4J_HOST=bolt://ols4-neo4j:7687
+      depends_on:
+        - ols4-solr
+        - ols4-neo4j    
+      links:
+        - ols4-solr
+        - ols4-neo4j 
+    ols4-frontend:
+      image: ghcr.io/ebispot/ols4-frontend:dev
+      env_file: ./frontend/.env
+      ports:
+        - 8081:8080
+      depends_on:
+        - ols4-backend
+      links:
+        - ols4-backend
+      volumes:
+        - ./frontend/Home.tsx:/opt/ols4-frontend/src/pages/home/Home.tsx
+        - ./frontend/Header.tsx:/opt/ols4-frontend/src/components/Header.tsx
+        - ./frontend/Footer.tsx:/opt/ols4-frontend/src/components/Footer.tsx
+    #run-api-tests:
+    #  profiles: ["run-api-tests"]
+    #  build: ./apitester4
+    #  volumes:
+    #    - ${OLS4_APITEST_OUTDIR:-./to_be_filled_by_script_outdir}:/mnt/out:rw
+    #    - ${OLS4_APITEST_COMPAREDIR:-./to_be_filled_by_script_comparedir}:/mnt/compare:rw
+    #  command: ["bash", "-c", "chown -R apitester:apitester /mnt && su -c \"java -jar /opt/apitester/target/apitester-1.0-SNAPSHOT-jar-with-dependencies.jar --url http://ols4-backend:8080 --outDir /mnt/out --compareDir /mnt/compare --deep > /mnt/out/apitester4.log\" apitester"]
+    #  depends_on:
+    #    - ols4-backend
+    #  links:
+    #    - ols4-backend
 volumes:
-    ols-solr-data:
-    ols-mongo-data:
-    oxo-neo4j-data:
-    oxo-mongo-data:
-    oxo-solr-data:
-    oxo-hsqldb:
-
-networks:
-  default:
-    name: customolsnet
+    ols4-neo4j-data:
+    ols4-solr-data:
