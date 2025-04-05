@@ -3,7 +3,7 @@ URIBASE = http://purl.obolibrary.org/obo
 ROBOT=robot
 # the below onts were collected from ols-config.yaml
 # (note that .owl is appended to each of these later on, so there's no need to add it here)
-ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen
+ONTS = upheno-patterns upheno-reordered-dev# upheno-reordered vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen
 
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
@@ -57,6 +57,10 @@ UPHENO_URL=https://github.com/obophenotype/upheno-dev/releases/download/v2023-10
 
 ontologies/upheno-reordered.owl: 
 	$(ROBOT) convert -I https://github.com/obophenotype/upheno-dev/releases/latest/download/upheno-curated.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+
+ontologies/upheno-reordered-dev.owl: 
+	wget "https://www.dropbox.com/scl/fi/j444yvunzchz20wo8eqd4/upheno-curated-with-sspo.owl?rlkey=127ip3bukud1gz54qbgqgbq5s&dl=0" -O $@.tmp.owl
+	$(ROBOT) convert -i $@.tmp.owl -o $@
 
 ontologies/upheno-patterns.owl:
 	$(ROBOT) convert -I https://raw.githubusercontent.com/obophenotype/upheno/master/src/patterns/pattern.owl -o $@.tmp.owl && mv $@.tmp.owl $@
