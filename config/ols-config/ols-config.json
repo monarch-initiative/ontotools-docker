@@ -151,7 +151,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/mondo-clingen.owl"
+      "ontology_purl": "file:/mnt/ontologies/mondo-clingen-review.owl"
     },
     {
       "id": "mondo",
