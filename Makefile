@@ -7,9 +7,14 @@ ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo
 
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
-VERSION = "0.0.3" 
+TODAY ?= $(shell date +%Y-%m-%d)
+VERSION = $(TODAY)
 IM=monarchinitiative/monarch-ols
 OLSCONFIG=/opt/ols/ols-config.yaml
+OBO=http://purl.obolibrary.org/obo
+ONT=mondo
+ONTBASE=$(OBO)/$(ONT)
+ANNOTATE_ONTOLOGY_VERSION = annotate -V $(ONTBASE)/releases/$(VERSION)/$@ --annotation owl:versionInfo $(VERSION)
 
 # Download and pre-process the ontologies
 clean:
@@ -22,6 +27,19 @@ ontologies/mondo-branch-%.owl:
 	cd github/mondo-branch-$* && git clone --depth 1 https://github.com/monarch-initiative/mondo.git -b $* 
 	cd github/mondo-branch-$*/mondo/src/ontology/ && make IMP=false PAT=false MIR=false mondo.owl
 	cp github/mondo-branch-$*/mondo/src/ontology/mondo.owl $@
+
+ontologies/mondo-clingen-review.owl:
+	mkdir -p github/mondo-clingen-review && rm -rf github/mondo-clingen-review/*
+	cd github/mondo-clingen-review && \
+		git clone --depth 1 https://github.com/monarch-initiative/mondo.git -b issue-9178
+	$(ROBOT) merge \
+		-i github/mondo-clingen-review/mondo/src/ontology/mondo-edit.obo \
+		query --update src/sparql/update/clingen-labels.ru \
+		remove --term MONDO:0005583 --select "self descendants" \
+		annotate --ontology-iri http://purl.obolibrary.org/obo/mondo/releases/$(VERSION)/mondo.owl \
+		         -V http://purl.obolibrary.org/obo/mondo/releases/$(VERSION)/mondo.owl \
+		         -o $@.tmp.owl
+	mv $@.tmp.owl $@
 
 ontologies/mondo-edit.owl:
 	mkdir -p github && mkdir -p github/main && rm -rf github/main/*
