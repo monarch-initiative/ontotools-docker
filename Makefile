@@ -34,7 +34,7 @@ ontologies/mondo-clingen-review.owl:
 	  git clone --depth 1 https://github.com/monarch-initiative/mondo.git -b issue-9178 && \
 	  cd mondo/src/ontology && \
 	  make subsets/mondo-clingen.owl IMP=false MIR=false && \
-	  mv subsets/mondo-clingen.owl ../../../../../../ontologies/mondo-clingen-review.owl
+	  mv subsets/mondo-clingen.owl ../../../../../ontologies/mondo-clingen-review.owl
 
 ontologies/mondo-edit.owl:
 	mkdir -p github && mkdir -p github/main && rm -rf github/main/*
