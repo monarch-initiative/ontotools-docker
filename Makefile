@@ -3,7 +3,7 @@ URIBASE = http://purl.obolibrary.org/obo
 ROBOT=robot
 # the below onts were collected from ols-config.yaml
 # (note that .owl is appended to each of these later on, so there's no need to add it here)
-ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen
+ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen mondo-clingen-review
 
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
@@ -33,8 +33,8 @@ ontologies/mondo-clingen-review.owl:
 	cd github/mondo-clingen-review && \
 	  git clone --depth 1 https://github.com/monarch-initiative/mondo.git -b issue-9178 && \
 	  cd mondo/src/ontology && \
-	  make subsets/mondo-clingen.owl IMP=false MIR=false && \
-	  mv subsets/mondo-clingen.owl ../../../../../../ontologies/mondo-clingen-review.owl
+	  make subsets/mondo-clingen.owl IMP=false MIR=false
+	cp github/mondo-clingen-review/mondo/src/ontology/subsets/mondo-clingen.owl $@
 
 ontologies/mondo-edit.owl:
 	mkdir -p github && mkdir -p github/main && rm -rf github/main/*
