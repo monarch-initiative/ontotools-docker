@@ -3,18 +3,12 @@ URIBASE = http://purl.obolibrary.org/obo
 ROBOT=robot
 # the below onts were collected from ols-config.yaml
 # (note that .owl is appended to each of these later on, so there's no need to add it here)
-ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen
+ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen mondo-clingen-review
 
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
-TODAY ?= $(shell date +%Y-%m-%d)
-VERSION = $(TODAY)
 IM=monarchinitiative/monarch-ols
 OLSCONFIG=/opt/ols/ols-config.yaml
-OBO=http://purl.obolibrary.org/obo
-ONT=mondo
-ONTBASE=$(OBO)/$(ONT)
-ANNOTATE_ONTOLOGY_VERSION = annotate -V $(ONTBASE)/releases/$(VERSION)/$@ --annotation owl:versionInfo $(VERSION)
 
 # Download and pre-process the ontologies
 clean:
