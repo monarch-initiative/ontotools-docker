@@ -135,6 +135,25 @@
       "ontology_purl": "file:/mnt/ontologies/mondo-clingen.owl"
     },
     {
+      "id": "mondo_clingen_branch_review",
+      "preferredPrefix": "MONDO_CLINGEN_BR",
+      "title": "Mondo Disease Ontology (ClinGen Subset) - BRANCH REVIEW",
+      "uri": "https://github.com/monarch-initiative/mondo/blob/issue-9178/src/ontology/mondo-edit.obo",
+      "description": "Branch review for Mondo_Clingen. DO NOT USE IN PRODUCTION.\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/MONDO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:/mnt/ontologies/mondo-clingen-review.owl"
+    },
+    {
       "id": "mondo",
       "preferredPrefix": "MONDO_DEV",
       "title": "Mondo Disease Ontology (Development Snapshot)",
