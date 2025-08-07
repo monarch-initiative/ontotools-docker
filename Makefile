@@ -75,7 +75,7 @@ ontologies/mondo-rare.owl:
 	$(ROBOT) convert -I http://purl.obolibrary.org/obo/mondo/subsets/mondo-rare.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 ontologies/mondo-clingen.owl:
-	$(ROBOT) convert -I https://raw.githubusercontent.com/monarch-initiative/mondo/gard-import/src/ontology/subsets/mondo-clingen.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+	$(ROBOT) convert -I https://github.com/monarch-initiative/mondo/releases/latest/download/mondo-clingen.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 ontologies/mondo-matrix.owl:
 	$(ROBOT) convert -I https://github.com/everycure-org/matrix-disease-list/releases/latest/download/mondo-with-filter-designations.owl -o $@.tmp.owl && mv $@.tmp.owl $@
