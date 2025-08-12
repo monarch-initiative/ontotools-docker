@@ -22,13 +22,14 @@ ontologies/mondo-branch-%.owl:
 	cd github/mondo-branch-$*/mondo/src/ontology/ && make IMP=false PAT=false MIR=false mondo.owl
 	cp github/mondo-branch-$*/mondo/src/ontology/mondo.owl $@
 
-ontologies/mondo-clingen-review.owl:
-	mkdir -p github/mondo-clingen-review && rm -rf github/mondo-clingen-review/*
-	cd github/mondo-clingen-review && \
-	  git clone --depth 1 https://github.com/monarch-initiative/mondo.git -b issue-9178 && \
-	  cd mondo/src/ontology && \
-	  make subsets/mondo-clingen.owl IMP=false MIR=false && \
-	  mv subsets/mondo-clingen.owl ../../../../../ontologies/mondo-clingen-review.owl
+# Stub entry for Mondo branch to use specifically to review content for ClinGen. Replace `issue-9178` with new feature branch to deploy.
+# ontologies/mondo-clingen-review.owl:
+#	mkdir -p github/mondo-clingen-review && rm -rf github/mondo-clingen-review/*
+#	cd github/mondo-clingen-review && \
+#	  git clone --depth 1 https://github.com/monarch-initiative/mondo.git -b issue-9178 && \
+#	  cd mondo/src/ontology && \
+#	  make subsets/mondo-clingen.owl IMP=false MIR=false && \
+#	  mv subsets/mondo-clingen.owl ../../../../../ontologies/mondo-clingen-review.owl
 
 ontologies/mondo-edit.owl:
 	mkdir -p github && mkdir -p github/main && rm -rf github/main/*
