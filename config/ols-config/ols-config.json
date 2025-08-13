@@ -20,7 +20,7 @@
         "http://purl.obolibrary.org/obo/IAO_0000115"
       ],
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/upheno-reordered.owl"
+      "ontology_purl": "file:///mnt/ontologies/upheno-reordered.owl"
     },
     {
       "id": "upheno_patterns",
@@ -38,7 +38,7 @@
         "http://purl.obolibrary.org/obo/IAO_0000115"
       ],
       "reasoner": "EL",
-      "ontology_purl": "file:/mnt/ontologies/upheno-patterns.owl"
+      "ontology_purl": "file:///mnt/ontologies/upheno-patterns.owl"
     },
     {
       "id": "mondo_patterns",
@@ -56,7 +56,7 @@
         "http://purl.obolibrary.org/obo/IAO_0000115"
       ],
       "reasoner": "EL",
-      "ontology_purl": "file:/mnt/ontologies/mondo-patterns.owl"
+      "ontology_purl": "file:///mnt/ontologies/mondo-patterns.owl"
     },
     {
       "id": "vbo",
@@ -74,7 +74,7 @@
         "http://purl.obolibrary.org/obo/IAO_0000115"
       ],
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/vbo-edit.owl",
+      "ontology_purl": "file:///mnt/ontologies/vbo-edit.owl",
       "reasoner": "EL"
     },
     {
@@ -94,7 +94,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/mondo-rare.owl"
+      "ontology_purl": "file:///mnt/ontologies/mondo-rare.owl"
     },
     {
       "id": "mondo_matrix",
@@ -113,7 +113,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/mondo-matrix.owl"
+      "ontology_purl": "file:///mnt/ontologies/mondo-matrix.owl"
     },
     {
       "id": "mondo_clingen",
@@ -132,7 +132,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/mondo-clingen.owl"
+      "ontology_purl": "file:///mnt/ontologies/mondo-clingen.owl"
     },
     {
       "id": "mondo_clingen_branch_review",
@@ -151,7 +151,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/mondo-clingen-review.owl"
+      "ontology_purl": "file:///mnt/ontologies/mondo-clingen-review.owl"
     },
     {
       "id": "mondo",
@@ -170,7 +170,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/mondo-edit.owl"
+      "ontology_purl": "file:///mnt/ontologies/mondo-edit.owl"
     },
     {
       "id": "omim",
@@ -190,7 +190,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/omim.owl"
+      "ontology_purl": "file:///mnt/ontologies/omim.owl"
     },
     {
       "id": "chr",
@@ -209,7 +209,7 @@
       ],
       "reasoner": "EL",
       "oboSlims": false,
-      "ontology_purl": "file:/mnt/ontologies/chr.owl"
+      "ontology_purl": "file:///mnt/ontologies/chr.owl"
     }
   ]
 }

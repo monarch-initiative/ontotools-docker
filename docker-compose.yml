@@ -7,13 +7,13 @@ services:
       volumes:
         - ols4-solr-data:/opt/solr/server/solr:rw
         - ols4-neo4j-data:/opt/neo4j/data:rw
-        - ./${OLS4_CONFIG:?OLS4 dataload requires a config file}:/mnt/config.json:ro
+        - ./${OLS4_CONFIG:?OLS4 dataload requires a config file}:/mnt/config/config.json:ro
         - ./ontologies:/mnt/ontologies:ro
           #- ./testcases:/opt/ols/dataload/testcases:ro
         - ./tmp:/tmp/out:rw
       command: ./dataload.dockersh ${OLS4_DATALOAD_ARGS:-}
     ols4-solr:
-      image: solr:9.0.0
+      image: solr:9.8.1
       environment:
         - SOLR_HOME=/mnt/ols4-solr-data
       ports:
@@ -25,7 +25,7 @@ services:
       #  ols4-dataload:
       #    condition: service_completed_successfully
     ols4-neo4j:
-      image: neo4j:4.4.9-community
+      image: neo4j:2025.03.0-community
       ports:
         - 7474:7474
         - 7687:7687
