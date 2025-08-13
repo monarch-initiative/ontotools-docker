@@ -7,7 +7,7 @@ services:
       volumes:
         - ols4-solr-data:/opt/solr/server/solr:rw
         - ols4-neo4j-data:/opt/neo4j/data:rw
-        - ./${OLS4_CONFIG:?OLS4 dataload requires a config file}:/mnt/config.json:ro
+        - ./${OLS4_CONFIG:?OLS4 dataload requires a config file}:/mnt/config/config.json:ro
         - ./ontologies:/mnt/ontologies:ro
           #- ./testcases:/opt/ols/dataload/testcases:ro
         - ./tmp:/tmp/out:rw
