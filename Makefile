@@ -47,7 +47,7 @@ github/mondo/.cloned:
 	touch $@
 
 ontologies/mondo-edit.owl: github/mondo/.cloned
-	sh odk.sh make -C github/mondo/src/ontology IMP=false PAT=false MIR=false mondo-edit.owl
+	./odk.sh make -C github/mondo/src/ontology IMP=false PAT=false MIR=false mondo-edit.owl
 	cp github/mondo/src/ontology/mondo-edit.owl $@
 
 
