@@ -38,7 +38,7 @@ ontologies/mondo-branch-%.owl:
 # 	cp github/main/mondo/src/ontology/mondo.owl $@
 
 # TEST for issue-34
-MONDO_REF ?= main
+MONDO_REF ?= master
 
 github/mondo/.cloned:
 	rm -rf github/mondo
