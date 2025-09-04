@@ -8,7 +8,6 @@ ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
 IM=monarchinitiative/monarch-ols
-OLSCONFIG=/opt/ols/ols-config.yaml
 
 # Download and pre-process the ontologies
 clean:
@@ -35,10 +34,12 @@ ontologies/mondo-branch-%.owl:
 # TEST for issue-34
 MONDO_REF ?= master
 
+.PHONY: ontologies/mondo-edit.owl
 ontologies/mondo-edit.owl:
+	@echo "\nBuilding MONDO (edit) from GitHub..."
 	mkdir -p github && rm -rf github/mondo
-	cd github/mondo && git clone --depth 1 --single-branch --branch $(MONDO_REF) \
-	  https://github.com/monarch-initiative/mondo.git
+	git clone --depth 1 --single-branch --branch $(MONDO_REF) \
+	  https://github.com/monarch-initiative/mondo.git github/mondo
 	cd github/mondo/src/ontology/ && make IMP=false PAT=false MIR=false mondo.owl
 	cp github/mondo/src/ontology/mondo.owl $@
 
@@ -48,64 +49,67 @@ ontologies/hp-branch-%.owl:
 	cd github/hp-branch-$*/human-phenotype-ontology/src/ontology/ && make IMP=false PAT=false MIR=false hp.owl
 	cp github/hp-branch-$*/human-phenotype-ontology/src/ontology/hp.owl $@
 
+.PHONY: ontologies/hp-edit.owl
 ontologies/hp-edit.owl:
+	@echo "\nBuilding HPO (edit) from GitHub..."
 	mkdir -p github && rm -rf github/hp/
-	cd github/hp && git clone --depth 1 --single-branch https://github.com/obophenotype/human-phenotype-ontology.git
-	cd github/hp/human-phenotype-ontology/src/ontology/ && make IMP=false PAT=false MIR=false hp.owl
-	cp github/hp/human-phenotype-ontology/src/ontology/hp.owl $@
+	git clone --depth 1 --single-branch https://github.com/obophenotype/human-phenotype-ontology.git github/hp
+	cd github/hp/src/ontology/ && make IMP=false PAT=false MIR=false hp.owl
+	cp github/hp/src/ontology/hp.owl $@
 
+.PHONY: ontologies/vbo-edit.owl
 ontologies/vbo-edit.owl:
+	@echo "\nBuilding VBO (edit) from GitHub..."
 	mkdir -p github && rm -rf github/vbo/
-	cd github/vbo && git clone --depth 1 https://github.com/monarch-initiative/vertebrate-breed-ontology.git
-	cd github/vbo/vertebrate-breed-ontology/src/ontology/ && make IMP=false PAT=false MIR=false vbo.owl -B
-	cp github/vbo/vertebrate-breed-ontology/src/ontology/vbo.owl $@
+	git clone --depth 1 --single-branch https://github.com/monarch-initiative/vertebrate-breed-ontology.git github/vbo
+	cd github/vbo/src/ontology/ && make IMP=false PAT=false MIR=false vbo.owl
+	cp github/vbo/src/ontology/vbo.owl $@
 
+.PHONY: ontologies/chr.owl
 ontologies/chr.owl:
+	@echo "\nDownloading CHR (latest) → $@"
 	$(ROBOT) convert -I https://raw.githubusercontent.com/monarch-initiative/monochrom/master/chr.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
-# ontologies/omim.owl:
-# 	$(ROBOT) convert -I https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl -o $@.tmp.owl && mv $@.tmp.owl $@
-
-OMIM_REF ?= latest
-OMIM_URL_latest = https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl
-OMIM_URL_tag    = https://github.com/monarch-initiative/omim/releases/download/$(OMIM_REF)/omim.owl
-
-tmp/omim.resolved:
-	@mkdir -p tmp
-	@curl -fsSLI -o /dev/null -w '%{url_effective}\n' $(OMIM_URL_latest) > $@.new
-	@cmp -s $@.new $@ || mv $@.new $@
-	@rm -f $@.new 2>/dev/null || true
-
-ifeq ($(OMIM_REF),latest)
-ontologies/omim.owl: tmp/omim.resolved
-	$(ROBOT) convert -I $(OMIM_URL_latest) -o $@.tmp.owl && mv $@.tmp.owl $@
-else
+.PHONY: ontologies/omim.owl
 ontologies/omim.owl:
-	$(ROBOT) convert -I $(OMIM_URL_tag) -o $@.tmp.owl && mv $@.tmp.owl $@
-endif
-
+	@echo "\nDownloading OMIM (latest) → $@"
+	$(ROBOT) convert -I https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 UPHENO_URL=https://github.com/obophenotype/upheno-dev/releases/download/v2023-10-27/upheno_all.owl
 
+.PHONY: ontologies/upheno-reordered.owl
 ontologies/upheno-reordered.owl:
+	@echo "\nDownloading upheno-reordered (latest) → $@"
 	$(ROBOT) convert -I https://github.com/obophenotype/upheno-dev/releases/latest/download/upheno-curated.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
+.PHONY: ontologies/upheno-patterns.owl
 ontologies/upheno-patterns.owl:
+	@echo "\nDownloading upheno-patterns (latest) → $@"
 	$(ROBOT) convert -I https://raw.githubusercontent.com/obophenotype/upheno/master/src/patterns/pattern.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
+.PHONY: ontologies/mondo-patterns.owl
 ontologies/mondo-patterns.owl:
+	@echo "\nDownloading mondo-patterns (latest) → $@"
 	$(ROBOT) convert -I https://raw.githubusercontent.com/monarch-initiative/mondo/master/src/patterns/pattern.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
+.PHONY: ontologies/mondo-rare.owl
 ontologies/mondo-rare.owl:
+	@echo "\nDownloading mondo-rare (latest) → $@"
 	$(ROBOT) convert -I http://purl.obolibrary.org/obo/mondo/subsets/mondo-rare.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
+.PHONY: ontologies/mondo-clingen.owl
 ontologies/mondo-clingen.owl:
+	@echo "\nDownloading mondo-clingen (latest) → $@"
 	$(ROBOT) convert -I https://github.com/monarch-initiative/mondo/releases/latest/download/mondo-clingen.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
+.PHONY: ontologies/mondo-matrix.owl
 ontologies/mondo-matrix.owl:
+	@echo "\nDownloading mondo-matrix (latest) → $@"
 	$(ROBOT) convert -I https://github.com/everycure-org/matrix-disease-list/releases/latest/download/mondo-with-filter-designations.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
+.PHONY: ontologies/uberon-human-view.owl
 ontologies/uberon-human-view.owl:
+	@echo "\nDownloading uberon-human-view (latest) → $@"
 	$(ROBOT) convert -I http://purl.obolibrary.org/obo/uberon/subsets/human-view.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 

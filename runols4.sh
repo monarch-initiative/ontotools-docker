@@ -20,7 +20,7 @@ else
 fi
 
 echo ">>> Reloading OLS dataload..."
-docker compose up ols4-dataload --force-recreate
+docker compose up -d ols4-dataload --force-recreate
 
 echo ">>> Restarting frontend..."
 docker compose up -d ols4-frontend
