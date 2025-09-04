@@ -63,8 +63,27 @@ ontologies/vbo-edit.owl:
 ontologies/chr.owl:
 	$(ROBOT) convert -I https://raw.githubusercontent.com/monarch-initiative/monochrom/master/chr.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
+# ontologies/omim.owl:
+# 	$(ROBOT) convert -I https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+
+OMIM_REF ?= latest
+OMIM_URL_latest = https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl
+OMIM_URL_tag    = https://github.com/monarch-initiative/omim/releases/download/$(OMIM_REF)/omim.owl
+
+tmp/omim.resolved:
+	@mkdir -p tmp
+	@curl -fsSLI -o /dev/null -w '%{url_effective}\n' $(OMIM_URL_latest) > $@.new
+	@cmp -s $@.new $@ || mv $@.new $@
+	@rm -f $@.new 2>/dev/null || true
+
+ifeq ($(OMIM_REF),latest)
+ontologies/omim.owl: tmp/omim.resolved
+	$(ROBOT) convert -I $(OMIM_URL_latest) -o $@.tmp.owl && mv $@.tmp.owl $@
+else
 ontologies/omim.owl:
-	$(ROBOT) convert -I https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+	$(ROBOT) convert -I $(OMIM_URL_tag) -o $@.tmp.owl && mv $@.tmp.owl $@
+endif
+
 
 UPHENO_URL=https://github.com/obophenotype/upheno-dev/releases/download/v2023-10-27/upheno_all.owl
 
