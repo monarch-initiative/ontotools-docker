@@ -24,3 +24,5 @@ docker compose up -d ols4-dataload --force-recreate
 
 echo ">>> Restarting frontend..."
 docker compose up -d ols4-frontend
+
+echo ">>> Finished reload"
