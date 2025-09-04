@@ -1,12 +1,5 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-# --- Ensure script is run with bash ---
-if [ -z "${BASH_VERSION:-}" ]; then
-  echo "❌ ERROR: This script must be run with bash, not sh."
-  echo "   Try:  bash runols4.sh [options]"
-  exit 1
-fi
+#!/bin/sh
+set -eu
 
 export OLS4_CONFIG=./config/ols-config/ols-config.json
 export JAVA_OPTS="--add-modules jdk.incubator.vector --add-opens=java.base/java.nio=ALL-UNNAMED -Xms12g -Xmx12g"
@@ -14,9 +7,9 @@ export JAVA_OPTS="--add-modules jdk.incubator.vector --add-opens=java.base/java.
 mkdir -p tmp
 
 # Usage:
-#   bash runols4.sh           → rebuild all ontologies + reload OLS
-#   bash runols4.sh mondo     → rebuild only mondo-edit.owl + reload OLS
-#   bash runols4.sh <target>  → rebuild a specific Makefile target
+#   sh runols4.sh           → rebuild all ontologies + reload OLS
+#   sh runols4.sh mondo     → rebuild only mondo-edit.owl + reload OLS
+#   sh runols4.sh <target>  → rebuild a specific Makefile target
 
 if [ "${1:-}" = "mondo" ]; then
   echo ">>> Building mondo-edit.owl only..."
