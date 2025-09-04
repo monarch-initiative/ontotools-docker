@@ -37,21 +37,10 @@ MONDO_REF ?= master
 
 ontologies/mondo-edit.owl:
 	mkdir -p github && rm -rf github/mondo
-	git clone --depth 1 --single-branch --branch $(MONDO_REF) \
-	  https://github.com/monarch-initiative/mondo.git github/mondo
+	cd github/mondo && git clone --depth 1 --single-branch --branch $(MONDO_REF) \
+	  https://github.com/monarch-initiative/mondo.git
 	cd github/mondo/src/ontology/ && make IMP=false PAT=false MIR=false mondo.owl
 	cp github/mondo/src/ontology/mondo.owl $@
-
-# github/mondo/.cloned:
-# 	rm -rf github/mondo
-# 	git clone --depth 1 --single-branch --branch $(MONDO_REF) \
-# 	  https://github.com/monarch-initiative/mondo.git github/mondo
-# 	touch $@
-
-# ontologies/mondo-edit.owl: github/mondo/.cloned
-# 	./odk.sh make -C github/mondo/src/ontology IMP=false PAT=false MIR=false mondo-edit.owl
-# 	cp github/mondo/src/ontology/mondo-edit.owl $@
-
 
 ontologies/hp-branch-%.owl:
 	mkdir -p github && mkdir -p github/hp-branch-$* && rm -rf github/hp-branch-$*/*
@@ -60,26 +49,26 @@ ontologies/hp-branch-%.owl:
 	cp github/hp-branch-$*/human-phenotype-ontology/src/ontology/hp.owl $@
 
 ontologies/hp-edit.owl:
-	mkdir -p github && mkdir -p github/main && rm -rf github/main/*
-	cd github/main && git clone --depth 1 https://github.com/obophenotype/human-phenotype-ontology.git
-	cd github/main/human-phenotype-ontology/src/ontology/ && make IMP=false PAT=false MIR=false hp.owl
-	cp github/main/human-phenotype-ontology/src/ontology/hp.owl $@
+	mkdir -p github && rm -rf github/hp/
+	cd github/hp && git clone --depth 1 --single-branch https://github.com/obophenotype/human-phenotype-ontology.git
+	cd github/hp/human-phenotype-ontology/src/ontology/ && make IMP=false PAT=false MIR=false hp.owl
+	cp github/hp/human-phenotype-ontology/src/ontology/hp.owl $@
 
 ontologies/vbo-edit.owl:
-	mkdir -p github && mkdir -p github/main && rm -rf github/main/*
-	cd github/main && git clone --depth 1 https://github.com/monarch-initiative/vertebrate-breed-ontology.git
-	cd github/main/vertebrate-breed-ontology/src/ontology/ && make IMP=false PAT=false MIR=false vbo.owl -B
-	cp github/main/vertebrate-breed-ontology/src/ontology/vbo.owl $@
+	mkdir -p github && rm -rf github/vbo/
+	cd github/vbo && git clone --depth 1 https://github.com/monarch-initiative/vertebrate-breed-ontology.git
+	cd github/vbo/vertebrate-breed-ontology/src/ontology/ && make IMP=false PAT=false MIR=false vbo.owl -B
+	cp github/vbo/vertebrate-breed-ontology/src/ontology/vbo.owl $@
 
-ontologies/chr.owl: 
+ontologies/chr.owl:
 	$(ROBOT) convert -I https://raw.githubusercontent.com/monarch-initiative/monochrom/master/chr.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
-ontologies/omim.owl: 
+ontologies/omim.owl:
 	$(ROBOT) convert -I https://github.com/monarch-initiative/omim/releases/latest/download/omim.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 UPHENO_URL=https://github.com/obophenotype/upheno-dev/releases/download/v2023-10-27/upheno_all.owl
 
-ontologies/upheno-reordered.owl: 
+ontologies/upheno-reordered.owl:
 	$(ROBOT) convert -I https://github.com/obophenotype/upheno-dev/releases/latest/download/upheno-curated.owl -o $@.tmp.owl && mv $@.tmp.owl $@
 
 ontologies/upheno-patterns.owl:
