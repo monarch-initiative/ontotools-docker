@@ -1,6 +1,3 @@
-#!/bin/sh
-set -eu
-
 export OLS4_CONFIG=./config/ols-config/ols-config.json
 export JAVA_OPTS="--add-modules jdk.incubator.vector --add-opens=java.base/java.nio=ALL-UNNAMED -Xms12g -Xmx12g"
 
@@ -13,13 +10,13 @@ mkdir -p tmp
 
 if [ "${1:-}" = "mondo" ]; then
   echo ">>> Building mondo-edit.owl only..."
-  ./odk.sh make -B ontologies/mondo-edit.owl
+  sh odk.sh make -B ontologies/mondo-edit.owl
 elif [ $# -gt 0 ]; then
   echo ">>> Building target: $*"
-  ./odk.sh make -B "$@"
+  sh odk.sh make -B "$@"
 else
   echo ">>> Building all ontologies..."
-  ./odk.sh make ontologies -B
+  sh odk.sh make ontologies -B
 fi
 
 echo ">>> Reloading OLS dataload..."
