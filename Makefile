@@ -31,24 +31,26 @@ ontologies/mondo-branch-%.owl:
 #	  make subsets/mondo-clingen.owl IMP=false MIR=false && \
 #	  mv subsets/mondo-clingen.owl ../../../../../ontologies/mondo-clingen-review.owl
 
-# ontologies/mondo-edit.owl:
-# 	mkdir -p github && mkdir -p github/main && rm -rf github/main/*
-# 	cd github/main && git clone --depth 1 https://github.com/monarch-initiative/mondo.git
-# 	cd github/main/mondo/src/ontology/ && make IMP=false PAT=false MIR=false mondo.owl
-# 	cp github/main/mondo/src/ontology/mondo.owl $@
 
 # TEST for issue-34
 MONDO_REF ?= master
 
-github/mondo/.cloned:
-	rm -rf github/mondo
+ontologies/mondo-edit.owl:
+	mkdir -p github && rm -rf github/mondo
 	git clone --depth 1 --single-branch --branch $(MONDO_REF) \
 	  https://github.com/monarch-initiative/mondo.git github/mondo
-	touch $@
+	cd github/mondo/src/ontology/ && make IMP=false PAT=false MIR=false mondo.owl
+	cp github/mondo/src/ontology/mondo.owl $@
 
-ontologies/mondo-edit.owl: github/mondo/.cloned
-	./odk.sh make -C github/mondo/src/ontology IMP=false PAT=false MIR=false mondo-edit.owl
-	cp github/mondo/src/ontology/mondo-edit.owl $@
+# github/mondo/.cloned:
+# 	rm -rf github/mondo
+# 	git clone --depth 1 --single-branch --branch $(MONDO_REF) \
+# 	  https://github.com/monarch-initiative/mondo.git github/mondo
+# 	touch $@
+
+# ontologies/mondo-edit.owl: github/mondo/.cloned
+# 	./odk.sh make -C github/mondo/src/ontology IMP=false PAT=false MIR=false mondo-edit.owl
+# 	cp github/mondo/src/ontology/mondo-edit.owl $@
 
 
 ontologies/hp-branch-%.owl:
