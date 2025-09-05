@@ -63,7 +63,7 @@ ontologies/vbo-edit.owl:
 	mkdir -p github && rm -rf github/vbo/
 	git clone --depth 1 --single-branch https://github.com/monarch-initiative/vertebrate-breed-ontology.git github/vbo
 	cd github/vbo/src/ontology/ && make IMP=false PAT=false MIR=false vbo.owl
-	cp -v github/vbo/src/ontology/vbo.owl $@
+	cp github/vbo/src/ontology/vbo.owl $@
 
 .PHONY: ontologies/chr.owl
 ontologies/chr.owl:
