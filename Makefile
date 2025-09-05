@@ -30,8 +30,6 @@ ontologies/mondo-branch-%.owl:
 #	  make subsets/mondo-clingen.owl IMP=false MIR=false && \
 #	  mv subsets/mondo-clingen.owl ../../../../../ontologies/mondo-clingen-review.owl
 
-
-# TEST for issue-34
 MONDO_REF ?= master
 
 .PHONY: ontologies/mondo-edit.owl
