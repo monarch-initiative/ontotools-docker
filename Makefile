@@ -3,7 +3,9 @@ URIBASE = http://purl.obolibrary.org/obo
 ROBOT=robot
 # the below onts were collected from ols-config.yaml
 # (note that .owl is appended to each of these later on, so there's no need to add it here)
-ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen
+# ONTS = upheno-reordered upheno-patterns vbo-edit chr mondo-edit mondo-rare mondo-patterns mondo-matrix omim mondo-clingen
+
+ONTS = mondo-edit mondo-clingen.noid chr
 
 #monarch
 ONTFILES = $(foreach n, $(ONTS), ontologies/$(n).owl)
@@ -99,6 +101,18 @@ ontologies/mondo-rare.owl:
 ontologies/mondo-clingen.owl:
 	@echo "\nDownloading mondo-clingen (latest) → $@"
 	$(ROBOT) convert -I https://github.com/monarch-initiative/mondo/releases/latest/download/mondo-clingen.owl -o $@.tmp.owl && mv $@.tmp.owl $@
+
+# Example: ClinGen subset post-processing
+.PHONY: ontologies/mondo-clingen.noid.owl
+ontologies/mondo-clingen.noid.owl: ontologies/mondo-clingen.owl
+	@echo "\nStripping oboInOwl:id from mondo-clingen → $@"
+	robot remove \
+	  --input $< \
+	  --term '<http://www.geneontology.org/formats/oboInOwl#id>' \
+	  --axioms annotation \
+	  --trim false \
+	  --output $@
+
 
 .PHONY: ontologies/mondo-matrix.owl
 ontologies/mondo-matrix.owl:
