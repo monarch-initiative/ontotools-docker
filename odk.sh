@@ -12,7 +12,7 @@ fi
 
 # Ensure Docker sees the repo folder you’re in
 docker run $TTY_FLAGS --rm \
-  -v "$(pwd)":/work -w /work \
+  -v $PWD/:/work -w /work \
   -e ROBOT_JAVA_ARGS='-Xmx4G' \
   -e JAVA_OPTS='-Xmx4G' \
   obolibrary/odkfull:v1.5.4 "$@"

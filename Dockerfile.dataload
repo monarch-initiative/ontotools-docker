@@ -1,0 +1,6 @@
+FROM ghcr.io/ebispot/ols4-dataload:dev
+
+USER root
+RUN rm -rf /opt/neo4j/data && \
+    mkdir -p /var/lib/neo4j/data && \
+    ln -s /var/lib/neo4j/data /opt/neo4j/data

@@ -1,6 +1,9 @@
 version: '3'
 services:
     ols4-dataload:
+      build:
+        context: .
+        dockerfile: Dockerfile.dataload # Extend in order to symlink neo4j volumes
       environment:
         - JAVA_OPTS=${JAVA_OPTS}
       image: ghcr.io/ebispot/ols4-dataload:dev
