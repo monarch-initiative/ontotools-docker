@@ -1,5 +1,5 @@
 #!/bin/bash
-export OLS4_CONFIG=./config/ols-config/test-ols-config.json # TODO: change back to ols-config.json
+export OLS4_CONFIG=./config/ols-config/ols-config.json
 export JAVA_OPTS="--add-modules jdk.incubator.vector --add-opens=java.base/java.nio=ALL-UNNAMED -Xms12g -Xmx12g"
 
 echo "OLS4_CONFIG=$OLS4_CONFIG"
