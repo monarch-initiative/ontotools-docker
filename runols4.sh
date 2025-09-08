@@ -9,7 +9,7 @@ mkdir -p tmp
 
 # Always stop any existing stack before reload
 echo ">>> Stopping any existing OLS containers..."
-docker compose down -v
+docker compose down
 
 # Build dataload image (neo4j symlink fix baked in, see Dockerfile.dataload)
 echo ">>> Ensuring ols4-dataload image is up to date..."
@@ -32,8 +32,13 @@ else
   sh odk.sh make ontologies -B
 fi
 
+# Load the ontology data into neo4j and solr
 echo ">>> Reloading OLS dataload..."
 docker compose up -d ols4-dataload --force-recreate
+
+# Wait for dataload container to exit successfully
+echo ">>> Waiting for dataload to complete..."
+docker wait ontotools-docker-ols4-dataload-1
 
 # Only the frontend needs to be restarted due to "depends_on" conditions in docker-compose.yml
 # which results in frontend, backend, solr, and neo4j being restarted
