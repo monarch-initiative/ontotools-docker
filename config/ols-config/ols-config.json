@@ -42,7 +42,7 @@
     },
     {
       "id": "mondo_patterns",
-      "preferredPrefix": "MONDO_PATTERN",
+      "preferredPrefix": "MONDO",
       "title": "Mondo Disease Ontology Pattern Ontology",
       "description": "Ontology that contains all the currently defined Mondo patterns.  DO NOT USE IN PRODUCTION.\n",
       "uri": "https://raw.githubusercontent.com/monarch-initiative/mondo/master/src/patterns/pattern.owl",
@@ -60,7 +60,7 @@
     },
     {
       "id": "vbo",
-      "preferredPrefix": "VBO_DEV",
+      "preferredPrefix": "VBO",
       "title": "Vertebrate Breed Ontology (Development Snapshot)",
       "uri": "http://purl.obolibrary.org/obo/vbo.owl",
       "description": "A work in progress deployment of VBO. Contact Sabrina Toro. DO NOT USE IN PRODUCTION.\n",
@@ -79,7 +79,7 @@
     },
     {
       "id": "mondo_rare",
-      "preferredPrefix": "MONDO_RARE",
+      "preferredPrefix": "MONDO",
       "title": "Mondo Disease Ontology (Rare Disease Subset)",
       "uri": "http://purl.obolibrary.org/obo/mondo/subsets/mondo-rare.owl",
       "description": "The Mondo Rare Disease Subset. DO NOT USE IN PRODUCTION.\n",
@@ -98,7 +98,7 @@
     },
     {
       "id": "mondo_matrix",
-      "preferredPrefix": "MONDO_MATRIX",
+      "preferredPrefix": "MONDO",
       "title": "Mondo Disease Ontology (MATRIX version)",
       "uri": "http://purl.obolibrary.org/obo/mondo/subsets/mondo-matrix.owl",
       "description": "This is a modified version of Mondo specifically for the MATRIX project. DO NOT USE IN PRODUCTION.\n",
@@ -117,7 +117,7 @@
     },
     {
       "id": "mondo_clingen",
-      "preferredPrefix": "MONDO_CLINGEN",
+      "preferredPrefix": "MONDO",
       "title": "Mondo Disease Ontology (ClinGen Subset)",
       "uri": "http://purl.obolibrary.org/obo/mondo/subsets/mondo-clingen.owl",
       "description": "Development Snapshot of the Mondo ClinGen Subset. DO NOT USE IN PRODUCTION. The Mondo ClinGen subset contains all the diseases that are in the ClinGen database and displays the labels preferred by ClinGen.\n",
@@ -136,7 +136,7 @@
     },
     {
       "id": "mondo_clingen_branch_review",
-      "preferredPrefix": "MONDO_CLINGEN_BR",
+      "preferredPrefix": "MONDO",
       "title": "Mondo Disease Ontology (ClinGen Subset) - BRANCH REVIEW",
       "uri": "https://github.com/monarch-initiative/mondo/blob/issue-9178/src/ontology/mondo-edit.obo",
       "description": "Branch review for Mondo_Clingen. DO NOT USE IN PRODUCTION.\n",
@@ -155,7 +155,7 @@
     },
     {
       "id": "mondo",
-      "preferredPrefix": "MONDO_DEV",
+      "preferredPrefix": "MONDO",
       "title": "Mondo Disease Ontology (Development Snapshot)",
       "uri": "http://purl.obolibrary.org/obo/mondo.owl",
       "description": "Unofficial development snapshot of the Mondo Disease Ontology. Contact Sabrina Toro. DO NOT USE IN PRODUCTION.\n",
