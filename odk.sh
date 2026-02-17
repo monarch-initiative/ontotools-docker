@@ -15,4 +15,4 @@ docker run $TTY_FLAGS --rm \
   -v $PWD/:/work -w /work \
   -e ROBOT_JAVA_ARGS='-Xmx4G' \
   -e JAVA_OPTS='-Xmx4G' \
-  obolibrary/odkfull:v1.5.4 "$@"
+  obolibrary/odkfull:v1.6 "$@"
