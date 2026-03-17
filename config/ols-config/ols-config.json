@@ -116,6 +116,25 @@
       "ontology_purl": "file:///mnt/ontologies/mondo-matrix.owl"
     },
     {
+      "id": "mondo_reorder",
+      "preferredPrefix": "MONDO",
+      "title": "Mondo Disease Ontology (New Upper Level Development version)",
+      "uri": "http://purl.obolibrary.org/obo/mondo/mondo-reorder.owl",
+      "description": "This is a version of Mondo specifically to review a new proposed upper level structure. DO NOT USE IN PRODUCTION.\n",
+      "base_uri": [
+        "http://purl.obolibrary.org/obo/MONDO_"
+      ],
+      "synonym_property": [
+        "http://www.geneontology.org/formats/oboInOwl#hasExactSynonym"
+      ],
+      "definition_property": [
+        "http://purl.obolibrary.org/obo/IAO_0000115"
+      ],
+      "reasoner": "EL",
+      "oboSlims": false,
+      "ontology_purl": "file:///mnt/ontologies/mondo-branch-260305.owl"
+    },
+    {
       "id": "mondo_clingen",
       "preferredPrefix": "MONDO",
       "title": "Mondo Disease Ontology (ClinGen Subset)",
